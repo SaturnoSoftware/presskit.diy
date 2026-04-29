@@ -1,0 +1,12 @@
+<h2 id="description">Description</h2>
+{{richText presskit.description}}
+
+<h2 id="history">History</h2>
+{{#if presskit.history}}
+{{richText presskit.history}}
+{{/if}}
+
+{{#each presskit.histories}}
+<h3>{{header}}</h3>
+{{richText text}}
+{{/each}}

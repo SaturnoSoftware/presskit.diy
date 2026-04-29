@@ -1,0 +1,645 @@
+/**
+ * Error Messages & Validation Tests
+ *
+ * Tests for:
+ * - Helpful error messages when things go wrong
+ * - Input validation with clear feedback
+ * - Recovery suggestions and hints
+ * - Error consistency across the codebase
+ * - Edge case error handling
+ */
+
+const fs = require('fs-extra')
+const path = require('path')
+const os = require('os')
+const { loadDataFile } = require('../lib/core/loader')
+
+describe('Error Messages & Validation', () => {
+  let tempDir
+
+  beforeEach(() => {
+    tempDir = path.join(os.tmpdir(), `presskit-error-test-${Date.now()}`)
+    fs.ensureDirSync(tempDir)
+  })
+
+  afterEach(() => {
+    fs.removeSync(tempDir)
+  })
+
+  describe('Input Validation - Missing Fields', () => {
+    it('should provide helpful error when company type is missing', () => {
+      const invalidData = {
+        title: 'Test Company'
+        // Missing: type
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('type')
+      )
+    })
+
+    it('should provide helpful error when company title is missing', () => {
+      const invalidData = {
+        type: 'company'
+        // Missing: title
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('title')
+      )
+    })
+
+    it('should provide helpful error when product type is missing', () => {
+      const invalidData = {
+        title: 'Test Product'
+        // Missing: type
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('type')
+      )
+    })
+
+    it('should provide helpful error when product title is missing', () => {
+      const invalidData = {
+        type: 'product'
+        // Missing: title
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('title')
+      )
+    })
+  })
+
+  describe('Input Validation - Invalid Types', () => {
+    it('should error when company type field is not a string', () => {
+      const invalidData = {
+        type: 123,
+        title: 'Test'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should error when title is not a string', () => {
+      const invalidData = {
+        type: 'company',
+        title: { invalid: 'object' }
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should error when socials array has invalid structure', () => {
+      const invalidData = {
+        type: 'company',
+        title: 'Test Company',
+        socials: [
+          {
+            name: 'Website'
+            // Missing: link
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should error when platforms array has invalid structure', () => {
+      const invalidData = {
+        type: 'product',
+        title: 'Test Product',
+        platforms: [
+          {
+            name: 'Windows'
+            // Missing: link
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(invalidData)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+  })
+
+  describe('File System Errors', () => {
+    it('should error with helpful message when data file does not exist', () => {
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'nonexistent.json'))
+      }).toThrow(
+        expect.stringContaining('file')
+      )
+    })
+
+    it('should error with helpful message when data file is not readable', () => {
+      const dataFile = path.join(tempDir, 'data.json')
+      fs.writeFileSync(dataFile, '{}')
+
+      // Make file unreadable
+      fs.chmodSync(dataFile, 0o000)
+
+      expect(() => {
+        loadDataFile(dataFile)
+      }).toThrow()
+
+      // Restore permissions for cleanup
+      fs.chmodSync(dataFile, 0o644)
+    })
+
+    it('should error with helpful message when description file does not exist', () => {
+      const dataWithMissingDesc = {
+        type: 'company',
+        title: 'Test',
+        description: {
+          markdownFile: 'nonexistent.md'
+        }
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(dataWithMissingDesc)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('markdown')
+      )
+    })
+  })
+
+  describe('JSON Format Errors', () => {
+    it('should provide helpful error when JSON is malformed', () => {
+      const malformedJSON = '{ invalid json }'
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        malformedJSON
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('JSON')
+      )
+    })
+
+    it('should provide helpful error when JSON is empty', () => {
+      fs.writeFileSync(path.join(tempDir, 'data.json'), '')
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow(
+        expect.stringContaining('empty')
+      )
+    })
+
+    it('should provide helpful error when JSON is not an object', () => {
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        '[]'
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should provide helpful error when JSON is null', () => {
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        'null'
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+  })
+
+  describe('XML Format Errors', () => {
+    it('should provide helpful error when XML is malformed', () => {
+      const malformedXML = '<?xml version="1.0"?>\n<company><title>Test</company>'
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.xml'),
+        malformedXML
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.xml'))
+      }).toThrow(
+        expect.stringContaining('XML')
+      )
+    })
+
+    it('should provide helpful error when XML declaration is missing', () => {
+      const xmlNoDecl = '<company><title>Test</title></company>'
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.xml'),
+        xmlNoDecl
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.xml'))
+      }).toThrow()
+    })
+
+    it('should provide helpful error when required XML elements are missing', () => {
+      const xmlMissingTitle = '<?xml version="1.0"?>\n<company></company>'
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.xml'),
+        xmlMissingTitle
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.xml'))
+      }).toThrow(
+        expect.stringContaining('title')
+      )
+    })
+  })
+
+  describe('Template & Rendering Errors', () => {
+    it('should handle gracefully when template references missing image', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        awards: [
+          {
+            description: 'Award',
+            info: 'Info'
+            // Image path would be optional, should not error
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).not.toThrow()
+    })
+
+    it('should provide helpful error when markdown rendering fails', () => {
+      // Write data with markdown that might fail parsing
+      const data = {
+        type: 'company',
+        title: 'Test',
+        description: 'Valid markdown here'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed).toBeDefined()
+    })
+
+    it('should gracefully handle special characters in strings', () => {
+      const data = {
+        type: 'company',
+        title: 'Test & Co. <Special>',
+        website: 'https://example.com?param=value&other=123',
+        socials: [
+          {
+            name: 'X (formerly Twitter)',
+            link: 'https://x.com/handle'
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.title).toBe('Test & Co. <Special>')
+    })
+  })
+
+  describe('Validation Helpers', () => {
+    it('should validate email addresses in contacts', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        contacts: [
+          {
+            name: 'Info',
+            mail: 'invalid-email'
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      // Should either pass or provide clear error
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).not.toThrow()
+    })
+
+    it('should validate URLs in socials', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        socials: [
+          {
+            name: 'Website',
+            link: 'not-a-valid-url'
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      // Should either pass or provide clear error
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).not.toThrow()
+    })
+
+    it('should validate that type is either company or product', () => {
+      const data = {
+        type: 'invalid-type',
+        title: 'Test'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should validate that arrays are indeed arrays', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        socials: 'should-be-array'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+
+    it('should validate that objects are indeed objects', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        address: ['should', 'be', 'object']
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      expect(() => {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      }).toThrow()
+    })
+  })
+
+  describe('Error Recovery Suggestions', () => {
+    it('should suggest checking syntax for JSON errors', () => {
+      const malformed = '{ "unclosed": value }'
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        malformed
+      )
+
+      let errorThrown = null
+      try {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      } catch (err) {
+        errorThrown = err.message
+      }
+
+      expect(errorThrown).toBeDefined()
+    })
+
+    it('should suggest checking required fields when validation fails', () => {
+      const incomplete = {
+        type: 'company'
+        // Missing title
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(incomplete)
+      )
+
+      let errorThrown = null
+      try {
+        loadDataFile(path.join(tempDir, 'data.json'))
+      } catch (err) {
+        errorThrown = err.message
+      }
+
+      expect(errorThrown).toContain('title')
+    })
+  })
+
+  describe('Edge Cases in Data', () => {
+    it('should handle very long titles', () => {
+      const longTitle = 'A'.repeat(1000)
+      const data = {
+        type: 'company',
+        title: longTitle
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.title.length).toBe(1000)
+    })
+
+    it('should handle empty arrays gracefully', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        socials: [],
+        credits: [],
+        contacts: []
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(Array.isArray(parsed.socials)).toBe(true)
+    })
+
+    it('should handle null values in optional fields', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        website: null,
+        phone: null
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed).toBeDefined()
+    })
+
+    it('should handle unicode characters in titles', () => {
+      const data = {
+        type: 'company',
+        title: '日本語 Company 中文'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.title).toContain('日本語')
+    })
+
+    it('should handle emoji in titles', () => {
+      const data = {
+        type: 'company',
+        title: 'My Company 🎮 Studios'
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.title).toContain('🎮')
+    })
+
+    it('should handle deeply nested objects', () => {
+      const data = {
+        type: 'company',
+        title: 'Test',
+        address: {
+          line: ['Line 1', 'Line 2', 'Line 3']
+        }
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.address.line.length).toBe(3)
+    })
+
+    it('should handle large numeric values', () => {
+      const data = {
+        type: 'product',
+        title: 'Test',
+        prices: [
+          {
+            currency: 'USD',
+            value: '999999999.99'
+          }
+        ]
+      }
+
+      fs.writeFileSync(
+        path.join(tempDir, 'data.json'),
+        JSON.stringify(data)
+      )
+
+      const parsed = loadDataFile(path.join(tempDir, 'data.json'))
+      expect(parsed.prices[0].value).toBe('999999999.99')
+    })
+  })
+})

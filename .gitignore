@@ -1,11 +1,10 @@
 # Project-specific development and test artifacts
 _RES/
-tests/
-data/
 build/
 Scripts/
 __BUILD/
 __DIST/
+.github/
 
 # Dependencies
 node_modules/
@@ -43,7 +42,7 @@ Thumbs.db
 # NPM packages folder.
 node_modules/
 
-# Brunch folder for temporary files.
+# Brunch folder for temporary times
 tmp/
 
 # Brunch output folder.
@@ -62,6 +61,7 @@ __DIST/
 # Windows paths (should never be committed)
 C:\workspace/
 C:/workspace/
+
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
 
@@ -452,20 +452,5 @@ fabric.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/web
 # Edit at https://www.toptal.com/developers/gitignore?templates=web
-
-### Web ###
-*.asp
-*.cer
-*.csr
-*.css
-*.htm
-*.html
-*.js
-*.jsp
-*.php
-*.rss
-*.wasm
-*.wat
-*.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/web

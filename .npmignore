@@ -1,5 +1,4 @@
 # Development & Testing
-tests/
 .github/
 Scripts/
 
@@ -9,7 +8,6 @@ coverage/
 __BUILD/
 __DIST/
 _RES/
-data/
 
 # Configuration files (repo-only)
 .gitignore
