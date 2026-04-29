@@ -6,7 +6,6 @@ build/
 Scripts/
 __BUILD/
 __DIST/
-.github/
 
 # Dependencies
 node_modules/
