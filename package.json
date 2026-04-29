@@ -1,0 +1,86 @@
+{
+  "name": "presskit-diy",
+  "version": "0.99.0",
+  "build": 1,
+  "description": "presskit.diy by Saturno.Software, based on presskit.html and the original presskit() workflow",
+  "license": "MIT",
+  "repository": "saturnosoftware/presskit.diy",
+  "author": {
+    "name": "mateusdigital",
+    "email": "hello@mateus.digital",
+    "url": "https://saturno.software/"
+  },
+  "keywords": [
+    "presskit",
+    "static site generator"
+  ],
+  "homepage": "https://github.com/saturnosoftware/presskit.diy#readme",
+  "bugs": "https://github.com/saturnosoftware/presskit.diy/issues",
+  "main": "lib/index.js",
+  "bin": {
+    "presskit-diy": "bin/presskit-diy",
+    "presskit": "bin/presskit"
+  },
+  "scripts": {
+    "start": "node bin/presskit-diy build --watch --dev data",
+    "build": "node bin/presskit-diy build data",
+    "test": "standard && jest && npm run test:presskit-utils",
+    "test:presskit-utils": "standard \"packages/presskit-utils/lib/**/*.js\" \"packages/presskit-utils/tests/**/*.js\" && jest --config packages/presskit-utils/jest.config.js",
+    "tester": "jest --watch",
+    "docs": "./documentation",
+    "docs:example": "node bin/presskit-diy build -DLM -o docs/example data"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "browser-sync": "^3.0.4",
+    "camelcase": "^6.3.0",
+    "chalk": "^4.1.2",
+    "chokidar": "^4.0.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8",
+    "sharp": "^0.34.0",
+    "upath": "^2.0.1",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "docco": "https://github.com/solarsailer/docco.git#ea3aea536562aed574d63904e2c2ab0138f4b40a",
+    "jest": "^29.7.0",
+    "mock-fs": "^5.2.0",
+    "snazzy": "^9.0.0",
+    "standard": "^17.1.2"
+  },
+  "standard": {
+    "globals": [
+      "beforeAll",
+      "afterAll",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "describe",
+      "expect",
+      "jest"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "lib/**/*.js",
+      "bin/**/*.js",
+      "!lib/**/*.d.ts",
+      "!**/__mocks__/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    }
+  }
+}

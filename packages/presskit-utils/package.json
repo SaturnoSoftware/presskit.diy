@@ -1,0 +1,24 @@
+{
+  "name": "@presskit-diy/utils",
+  "version": "0.1.0",
+  "description": "Reusable filesystem, path, console, and zip helpers extracted from presskit.diy",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "standard \"lib/**/*.js\" \"tests/**/*.js\" && jest --config jest.config.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.2.0",
+    "upath": "^2.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mock-fs": "^5.2.0",
+    "standard": "^17.1.2"
+  }
+}

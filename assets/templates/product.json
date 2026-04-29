@@ -1,0 +1,151 @@
+{
+  // Required: keep this as "product" for product/game pages.
+  "type": "product",
+
+  // Required: the public product name.
+  "title": "Your Product Name",
+
+  // Optional: primary product links and release info.
+  // "website": "https://example.com/product",
+  // "pressCopyRequest": "https://example.com/press-copy",
+
+  // Optional: partner/publisher information
+  // "partners": [
+  //   {
+  //     "type": "Publisher",
+  //     "title": "Company Name",
+  //     "website": "https://example.com",
+  //     "basedIn": "City, Country"
+  //   }
+  // ],
+
+  // Optional: release dates
+  // "releaseDates": [
+  //   "2024-06-15"
+  // ],
+
+  // Optional: available platforms
+  // "platforms": [
+  //   {
+  //     "name": "Windows",
+  //     "link": "https://example.com/windows"
+  //   },
+  //   {
+  //     "name": "macOS",
+  //     "link": "https://example.com/macos"
+  //   }
+  // ],
+
+  // Optional: pricing information
+  // "prices": [
+  //   {
+  //     "currency": "USD",
+  //     "value": "19.99"
+  //   }
+  // ],
+
+  // Optional: related products (DLC, sequels, expansions)
+  // "relations": [
+  //   {
+  //     "type": "DLC",
+  //     "product": "Product Name: Expansion"
+  //   }
+  // ],
+
+  // Optional: product description (can be string or markdownFile reference)
+  // "description": {
+  //   "markdownFile": "description.md"
+  // },
+
+  // Optional: product history and background
+  // "history": "Tell the story of how this product was made.",
+  // "histories": [
+  //   {
+  //     "header": "Development",
+  //     "text": "Detailed development story here."
+  //   }
+  // ],
+
+  // Optional: key features and benefits
+  // "features": [
+  //   "Main feature or value proposition",
+  //   "Another important feature"
+  // ],
+
+  // Optional: product media (trailers, videos)
+  // "trailers": [
+  //   {
+  //     "name": "Release Trailer",
+  //     "youtube": "dQw4w9WgXcQ",
+  //     "vimeo": "123456789",
+  //     "download": "https://example.com/trailer.mp4"
+  //   }
+  // ],
+
+  // Optional: store/platform widgets
+  // "widgets": {
+  //   "appstore": "950812012",
+  //   "playstore": "com.example.product",
+  //   "steam": "347160",
+  //   "humble": "example/product",
+  //   "itch": "27992",
+  //   "gamejolt": "abcXYZ",
+  //   "bandcamp": "1135613467",
+  //   "mailchimp": "https://example.com/newsletter"
+  // },
+
+  // Optional: awards and recognitions
+  // "awards": [
+  //   {
+  //     "description": "Award name",
+  //     "info": "Organization, Year"
+  //   }
+  // ],
+
+  // Optional: testimonials or quotes
+  // "quotes": [
+  //   {
+  //     "description": "Quote text here.",
+  //     "name": "Person Name",
+  //     "website": "example.com",
+  //     "link": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: additional links or information sections
+  // "additionals": [
+  //   {
+  //     "title": "Section Title",
+  //     "description": "Description text",
+  //     "link": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: company/developer information
+  // "abouts": [
+  //   {
+  //     "title": "Company Name",
+  //     "description": "Information about your company or development team.",
+  //     "link": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: team and contributors
+  // "credits": [
+  //   {
+  //     "person": "Name",
+  //     "role": "Position/Role",
+  //     "website": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: press contact information
+  // "contacts": [
+  //   {
+  //     "name": "Press Inquiries",
+  //     "mail": "press@example.com",
+  //     "link": "https://example.com"
+  //   }
+  // ]
+}
+

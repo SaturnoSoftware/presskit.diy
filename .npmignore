@@ -1,0 +1,30 @@
+# Development & Testing
+tests/
+.github/
+Scripts/
+
+# Development artifacts
+build/
+coverage/
+__BUILD/
+__DIST/
+_RES/
+data/
+
+# Configuration files (repo-only)
+.gitignore
+.editorconfig
+.eslintrc*
+.prettier*
+jest.config.js
+
+# Documentation
+documentation/
+docs/
+
+# Internal dev/test artifacts
+lib/core/test.html
+
+# Windows-path artifacts
+C:\workspace/
+C:/workspace/

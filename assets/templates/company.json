@@ -1,0 +1,106 @@
+{
+  // Required: keep this as "company" for the root/company page.
+  "type": "company",
+
+  // Required: your studio or company name.
+  "title": "Your Company Name",
+
+  // Optional: basic company information
+  // "basedIn": "City, Country",
+  // "foundingDate": "2024",
+  // "website": "https://example.com",
+  // "phone": "+1 000-0000-0000",
+  // "pressContact": "press@example.com",
+  // "analytics": "UA-000000-0",
+
+  // Optional: company address for press kit
+  // "address": {
+  //   "line": [
+  //     "Company Name",
+  //     "City, Country",
+  //     "Region"
+  //   ]
+  // },
+
+  // Optional: social media and external links
+  // "socials": [
+  //   {
+  //     "name": "Website",
+  //     "link": "https://example.com"
+  //   },
+  //   {
+  //     "name": "GitHub",
+  //     "link": "https://github.com/yourprofile"
+  //   }
+  // ],
+
+  // Optional: company description (can be string or markdownFile reference)
+  // "description": {
+  //   "markdownFile": "description.md"
+  // },
+
+  // Optional: company history and background
+  // "history": "Your company history and story.",
+  // "histories": [
+  //   {
+  //     "header": "Chapter Title",
+  //     "text": "Detailed history text here."
+  //   }
+  // ],
+
+  // Optional: company media (trailers, videos)
+  // "trailers": [
+  //   {
+  //     "name": "Company Trailer",
+  //     "youtube": "dQw4w9WgXcQ",
+  //     "vimeo": "123456789",
+  //     "download": "https://example.com/trailer.mp4"
+  //   }
+  // ],
+
+  // Optional: awards and recognitions
+  // "awards": [
+  //   {
+  //     "description": "Award name",
+  //     "info": "Organization, Year"
+  //   }
+  // ],
+
+  // Optional: testimonials or quotes
+  // "quotes": [
+  //   {
+  //     "description": "Quote text here.",
+  //     "name": "Person Name",
+  //     "website": "example.com",
+  //     "link": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: additional links or information sections
+  // "additionals": [
+  //   {
+  //     "title": "Section Title",
+  //     "description": "Description text",
+  //     "link": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: team and contributors
+  // "credits": [
+  //   {
+  //     "person": "Name",
+  //     "role": "Position/Role",
+  //     "website": "https://example.com"
+  //   }
+  // ],
+
+  // Optional: press contact information
+  // "contacts": [
+  //   {
+  //     "name": "Press Inquiries",
+  //     "mail": "press@example.com",
+  //     "link": "https://example.com"
+  //   }
+  // ]
+}
+
