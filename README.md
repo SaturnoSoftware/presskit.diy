@@ -58,7 +58,7 @@ runBuildCommand({
 - **Cross-Platform** — macOS, Linux, Windows support
 - **Secure** — 100% static HTML, no server required
 - **Scaffolding** — Generate templates instantly
-- **⚡ Zero Dependencies** — Deploy anywhere (just HTML/CSS/JS)
+- ** Zero Dependencies** — Deploy anywhere (just HTML/CSS/JS)
 
 ---
 
