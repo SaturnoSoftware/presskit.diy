@@ -1,6 +1,6 @@
 {
   "name": "presskit-diy",
-  "version": "0.99.0",
+  "version": "0.99.1",
   "build": 3,
   "description": "presskit.diy by Saturno.Software, based on presskit.html and the original presskit() workflow",
   "license": "MIT",
