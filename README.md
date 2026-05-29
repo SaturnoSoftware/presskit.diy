@@ -1,14 +1,24 @@
-# presskit.diy
+<p align="center">
+    <img src="https://saturno.software/IMGs/Banners/Banner-PressKitDiyHalf.svg">
+</p>
 
-[![npm version](https://badgen.net/npm/v/presskit-diy?cache=600)](https://npmjs.org/package/presskit-diy)
-[![npm downloads](https://badgen.net/npm/dm/presskit-diy?cache=600)](https://npmjs.org/package/presskit-diy)
-[![License: MIT](https://badgen.net/badge/license/MIT/blue)](./LICENSE)
-[![Code Style: Standard](https://badgen.net/badge/code%20style/standard/f2a)](http://standardjs.com/)
-[![Tests: CI verified](https://badgen.net/badge/tests/CI%20verified/green)](./tests)
 
-**Generate beautiful press kits in minutes.** Static HTML, zero server required.
+<p align="center">
+    <a href="https://npmjs.org/package/presskit-diy"><img src="https://badgen.net/npm/v/presskit-diy?cache=600" alt="npm version"></a>
+    <a href="https://npmjs.org/package/presskit-diy"><img src="https://badgen.net/npm/dm/presskit-diy?cache=600" alt="npm downloads"></a>    
+    <a href="./LICENSE"><img src="https://badgen.net/badge/license/MIT/blue" alt="License: MIT"></a>
+    <a href="./tests"><img src="https://badgen.net/badge/tests/CI%20verified/green" alt="Tests: CI verified"></a>
+    <a href="https://github.com/SaturnoSoftware/presskit.diy"><img src="https://badgen.net/badge/platform/macOS%20%7C%20Linux%20%7C%20Windows/blue" alt="Platform"></a>
+</p>
 
-presskit.diy is a modern Node.js CLI tool for creating professional press kits. It supports both XML (for backward compatibility with the original presskit) and JSON/JSONC (for modern projects). Deploy anywhere—it's just static files.
+<p align="center">
+  <b>Generate beautiful press kits in minutes.</b> Static HTML, zero server required.
+  <br>
+  <br>
+</p>
+
+
+**presskit.diy** is a modern Node.js CLI tool for creating professional press kits. It supports both XML (for backward compatibility) and JSON/JSONC (for modern projects). Deploy anywhere — it's just static files.
 
 Maintained by [Saturno.Software](https://saturno.software/), based on the legendary [presskit.html](https://github.com/pixelnest/presskit.html) by Pixelnest Studio.
 
@@ -58,7 +68,7 @@ runBuildCommand({
 - **Cross-Platform** — macOS, Linux, Windows support
 - **Secure** — 100% static HTML, no server required
 - **Scaffolding** — Generate templates instantly
-- ** Zero Dependencies** — Deploy anywhere (just HTML/CSS/JS)
+- **Zero Dependencies** — Deploy anywhere (just HTML/CSS/JS)
 
 ---
 
@@ -77,33 +87,6 @@ npm install presskit-diy
 
 ### Requirements
 - Node.js 14+ ([Download](https://nodejs.org/))
-
----
-
-## Verification And Saturno Build Contract
-
-`presskit.diy` now keeps one Saturno-standard build/package surface alongside the existing npm commands.
-
-Current repo-level entrypoints:
-
-```powershell
-pwsh -File Scripts/build.ps1 -ProjectRoot .
-pwsh -File Scripts/package.ps1 -ProjectRoot . -BuildNumber 0
-```
-
-What they do:
-
-- `Scripts/build.ps1` runs the canonical verification path: `npm test -- --runInBand` and `npm run build`
-- `Scripts/package.ps1` stages the npm tarball produced by `npm pack`
-- canonical Saturno outputs live under `__BUILD/<release-name>/` and `__DIST/<release-name>/`
-
-The existing npm commands remain the underlying repo commands:
-
-```bash
-npm test -- --runInBand
-npm run build
-npm pack --dry-run
-```
 
 ---
 
@@ -278,5 +261,6 @@ A: Not yet. presskit.diy is command-line based. CLI simplifies deployment.
 - [presskit.html](https://github.com/pixelnest/presskit.html)
 
 ---
-
-**Made with ❤️ by Saturno.Software**
+<p align="center">
+  <b>Made with ❤️ by Saturno.Software</b>
+</p>
