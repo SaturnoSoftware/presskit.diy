@@ -1,10 +1,10 @@
 # Project-specific development and test artifacts
 _RES/
 build/
-Scripts/
 __BUILD/
 __DIST/
-.github/
+*.tgz
+.claude/
 
 # Dependencies
 node_modules/
