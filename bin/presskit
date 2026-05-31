@@ -10,7 +10,7 @@ const { program } = require('commander')
 
 const version = require('../package.json').version
 
-const description = `presskit.diy by Saturno.Software (${chalk.blue('http://saturno.software')}).
+const description = `presskit.diy by Saturno.Software (${chalk.blue('https://saturno.software')}).
   Primary CLI: ${chalk.blue('presskit-diy')} (compatibility alias: ${chalk.blue('presskit')}).
   Based on presskit.html by Pixelnest Studio and the original ${chalk.blue('http://dopresskit.com/')} workflow.`
 
